@@ -30,7 +30,27 @@ namespace csharpcore
 
         public void DoUpdateQuality()
         {
-            updateIndividualItem(item);
+            if (isAgedBrie(item))
+            {
+                AgedBrieItemUpdater updater = new AgedBrieItemUpdater(item);
+                updater.DoUpdateQuality();
+
+            }
+            else if (isBackstage(item))
+            {
+                BackstageItemUpdater updater = new BackstageItemUpdater(item);
+                updater.DoUpdateQuality();
+            }
+            else if (isSulfuras(item))
+            {
+                SulfurasItemUpdater updater = new SulfurasItemUpdater(item);
+                updater.DoUpdateQuality();
+            }
+            else
+            {
+                NormalItemUpdater updater = new NormalItemUpdater(item);
+                updater.DoUpdateQuality();
+            }
         }
 
         protected void increaseQuality(Item item) {
@@ -53,31 +73,6 @@ namespace csharpcore
 
         protected  bool passedSellDate(Item item) {
             return item.SellIn < 0;
-        }
-
-        private void updateIndividualItem(Item item)
-        {   
-            if (isAgedBrie(item))
-            {
-                AgedBrieItemUpdater updater = new AgedBrieItemUpdater(item);
-                updater.DoUpdateQuality();
-
-            }
-            else if (isBackstage(item))
-            {
-                BackstageItemUpdater updater = new BackstageItemUpdater(item);
-                updater.DoUpdateQuality();
-            }
-            else if (isSulfuras(item))
-            {
-                SulfurasItemUpdater updater = new SulfurasItemUpdater(item);
-                updater.DoUpdateQuality();
-            }
-            else
-            {
-                NormalItemUpdater updater = new NormalItemUpdater(item);
-                updater.DoUpdateQuality();
-            }
         }
     }
 }
