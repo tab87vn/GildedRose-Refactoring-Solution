@@ -18,25 +18,25 @@ namespace csharpcore
             // NOP
         }
 
-        protected void increaseQuality(Item item) {
+        protected void IncreaseQuality(Item item) {
             if (item.Quality < MAX_QUALITY)
             {
                 item.Quality = item.Quality + 1;
             }
         }
 
-        protected void decreaseQuality(Item item) {
+        protected void DecreaseQuality(Item item) {
             if (item.Quality > MIN_QUALITY)
             {
                 item.Quality = item.Quality - 1;
             }
         }
 
-        protected void decreaseSellIn(Item item) {
+        protected void DecreaseSellIn(Item item) {
             item.SellIn = item.SellIn - 1;
         }
 
-        protected  bool passedSellDate(Item item) {
+        protected  bool PassedSellDate(Item item) {
             return item.SellIn < 0;
         }
     }

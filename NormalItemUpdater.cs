@@ -4,15 +4,16 @@ namespace csharpcore
     {
         public NormalItemUpdater(Item item) : base(item)
         {
+            // NOP
         }
 
         public override void DoUpdateQuality()
         {
-            decreaseQuality(item);
-            decreaseSellIn(item);
+            DecreaseQuality(item);
+            DecreaseSellIn(item);
 
-            if (passedSellDate(item)) {
-                decreaseQuality(item);
+            if (PassedSellDate(item)) {
+                DecreaseQuality(item);
             }
         }
     }

@@ -4,6 +4,7 @@ namespace csharpcore
     {
         public SulfurasItemUpdater(Item item) : base(item)
         {
+            // NOP
         }
     }
 }

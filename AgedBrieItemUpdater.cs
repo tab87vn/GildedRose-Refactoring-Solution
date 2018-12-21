@@ -1,17 +1,18 @@
- namespace  csharpcore
+ namespace csharpcore
  {
     public class AgedBrieItemUpdater : ItemUpdater
     {
         public AgedBrieItemUpdater(Item item) : base(item)
         {
+            // NOP
         }
 
         public override void DoUpdateQuality()
         {
-            increaseQuality(item);
-            decreaseSellIn(item);
-            if (passedSellDate(item)) {
-                increaseQuality(item);
+            IncreaseQuality(item);
+            DecreaseSellIn(item);
+            if (PassedSellDate(item)) {
+                IncreaseQuality(item);
             }
         }
     }

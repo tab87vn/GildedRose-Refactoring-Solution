@@ -8,21 +8,21 @@ namespace csharpcore
 
         public override void DoUpdateQuality()
         {
-            increaseQuality(item);
+            IncreaseQuality(item);
 
             if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
             {
-                increaseQuality(item);
+                IncreaseQuality(item);
             }
 
             if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
             {
-                increaseQuality(item);
+                IncreaseQuality(item);
             }
 
-            decreaseSellIn(item);
+            DecreaseSellIn(item);
 
-            if (passedSellDate(item)) {
+            if (PassedSellDate(item)) {
                 item.Quality = MIN_QUALITY;
             }
         }
