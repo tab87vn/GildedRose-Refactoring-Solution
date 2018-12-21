@@ -12,7 +12,7 @@ namespace csharpcore
             DecreaseQuality(item);
             DecreaseSellIn(item);
 
-            if (PassedSellDate(item)) {
+            if (SellDateHasPassed(item)) {
                 DecreaseQuality(item);
             }
         }

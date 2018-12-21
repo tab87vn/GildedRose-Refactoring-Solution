@@ -11,7 +11,7 @@
         {
             IncreaseQuality(item);
             DecreaseSellIn(item);
-            if (PassedSellDate(item)) {
+            if (SellDateHasPassed(item)) {
                 IncreaseQuality(item);
             }
         }

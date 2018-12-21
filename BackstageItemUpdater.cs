@@ -4,6 +4,7 @@ namespace csharpcore
     {
         public BackstageItemUpdater(Item item) : base(item)
         {
+            // NOP
         }
 
         public override void DoUpdateQuality()
@@ -22,7 +23,7 @@ namespace csharpcore
 
             DecreaseSellIn(item);
 
-            if (PassedSellDate(item)) {
+            if (SellDateHasPassed(item)) {
                 item.Quality = MIN_QUALITY;
             }
         }

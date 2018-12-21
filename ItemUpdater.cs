@@ -36,7 +36,7 @@ namespace csharpcore
             item.SellIn = item.SellIn - 1;
         }
 
-        protected  bool PassedSellDate(Item item) {
+        protected  bool SellDateHasPassed(Item item) {
             return item.SellIn < 0;
         }
     }
