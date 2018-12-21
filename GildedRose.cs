@@ -53,11 +53,16 @@ namespace csharpcore
             }
         }
 
+        void decreaseSellIn(Item item) {
+            item.SellIn = item.SellIn - 1;
+        }
+
         private void updateIndividualItem(Item item)
         {   
             if (isAgedBrie(item))
             {
                 increaseQuality(item);
+                decreaseSellIn(item);
             }
             else if (isBackstage(item))
             {
@@ -72,18 +77,16 @@ namespace csharpcore
                 {
                     increaseQuality(item);
                 }
+
+                decreaseSellIn(item);
             }
             else
             {
                 if (!isSulfuras(item))
                 {
                     decreaseQuality(item);
+                    decreaseSellIn(item);
                 }
-            }
-
-            if (!isSulfuras(item))
-            {
-                item.SellIn = item.SellIn - 1;
             }
 
             if (item.SellIn < 0)
