@@ -9,7 +9,7 @@ namespace csharpcore
         const int MIN_QUALITY = 0;
         const int DOUBLE_DEGRATION_STARTS_BEFORE = 11;
         const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
-        private Item item;
+        protected Item item;
 
         private bool isAgedBrie(Item item) {
             return item.Name == AGEDBRIE;
@@ -34,25 +34,25 @@ namespace csharpcore
             updateIndividualItem(item);
         }
 
-        void increaseQuality(Item item) {
+        protected void increaseQuality(Item item) {
             if (item.Quality < MAX_QUALITY)
             {
                 item.Quality = item.Quality + 1;
             }
         }
 
-        void decreaseQuality(Item item) {
+        protected void decreaseQuality(Item item) {
             if (item.Quality > MIN_QUALITY)
             {
                 item.Quality = item.Quality - 1;
             }
         }
 
-        void decreaseSellIn(Item item) {
+        protected void decreaseSellIn(Item item) {
             item.SellIn = item.SellIn - 1;
         }
 
-        private bool passedSellDate(Item item) {
+        protected  bool passedSellDate(Item item) {
             return item.SellIn < 0;
         }
 
@@ -60,7 +60,9 @@ namespace csharpcore
         {   
             if (isAgedBrie(item))
             {
-                UpdateAgedBrieItemQuality(item);
+                AgedBrieItemUpdater updater = new AgedBrieItemUpdater(item);
+                updater.DoUpdateQuality();
+
             }
             else if (isBackstage(item))
             {
@@ -110,15 +112,6 @@ namespace csharpcore
                 if (passedSellDate(item)) {
                     item.Quality = MIN_QUALITY;
                 }
-        }
-
-        private void UpdateAgedBrieItemQuality(Item item)
-        {
-            increaseQuality(item);
-            decreaseSellIn(item);
-            if (passedSellDate(item)) {
-                increaseQuality(item);
-            }
         }
     }
 }
