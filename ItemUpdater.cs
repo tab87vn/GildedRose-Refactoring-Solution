@@ -11,18 +11,6 @@ namespace csharpcore
         protected const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
         protected Item item;
 
-        private bool isAgedBrie(Item item) {
-            return item.Name == AGEDBRIE;
-        }
-
-        private bool isBackstage(Item item) {
-            return item.Name == BACKSTAGE;
-        }
-
-        private bool isSulfuras(Item item) {
-            return item.Name == SULFURAS;
-        }
-
         public ItemUpdater(Item item)
         {
             this.item = item;
@@ -30,26 +18,19 @@ namespace csharpcore
 
         public void DoUpdateQuality()
         {
-            if (isAgedBrie(item))
-            {
-                AgedBrieItemUpdater updater = new AgedBrieItemUpdater(item);
-                updater.DoUpdateQuality();
-
-            }
-            else if (isBackstage(item))
-            {
-                BackstageItemUpdater updater = new BackstageItemUpdater(item);
-                updater.DoUpdateQuality();
-            }
-            else if (isSulfuras(item))
-            {
-                SulfurasItemUpdater updater = new SulfurasItemUpdater(item);
-                updater.DoUpdateQuality();
-            }
-            else
-            {
-                NormalItemUpdater updater = new NormalItemUpdater(item);
-                updater.DoUpdateQuality();
+            switch (item.Name) {
+                case AGEDBRIE:
+                    new AgedBrieItemUpdater(item).DoUpdateQuality();
+                  break;
+                case BACKSTAGE:
+                    new BackstageItemUpdater(item).DoUpdateQuality();
+                    break;
+                case SULFURAS:
+                    new SulfurasItemUpdater(item).DoUpdateQuality();
+                    break;
+                default:
+                    new NormalItemUpdater(item).DoUpdateQuality();
+                    break;
             }
         }
 
