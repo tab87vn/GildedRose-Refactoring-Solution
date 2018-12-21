@@ -88,23 +88,17 @@ namespace csharpcore
 
             if (item.SellIn < 0)
             {
-                if (!isAgedBrie(item))
+                if (isAgedBrie(item))
                 {
-                    if (!isBackstage(item))
-                    {
-                        decreaseQuality(item);
-                    }
-                    else
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
+                    increaseQuality(item);
+                }
+                else if (isBackstage(item))
+                {
+                    item.Quality = MIN_QUALITY;
                 }
                 else
                 {
-                    if (item.Quality < MAX_QUALITY)
-                    {
-                        item.Quality = item.Quality + 1;
-                    }
+                    decreaseQuality(item);
                 }
             }
         }
