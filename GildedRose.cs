@@ -51,28 +51,32 @@ namespace csharpcore
                     }
                 }
             }
-            else
+            else if (isAgedBrie(item))
+            {
+                if (item.Quality < MAX_QUALITY)
+                {
+                    item.Quality = item.Quality + 1;
+                }
+            }
+            else if (isBackstage(item))
             {
                 if (item.Quality < MAX_QUALITY)
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (isBackstage(item))
+                    if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
                     {
-                        if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
+                        if (item.Quality < MAX_QUALITY)
                         {
-                            if (item.Quality < MAX_QUALITY)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = item.Quality + 1;
                         }
+                    }
 
-                        if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
+                    if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
+                    {
+                        if (item.Quality < MAX_QUALITY)
                         {
-                            if (item.Quality < MAX_QUALITY)
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = item.Quality + 1;
                         }
                     }
                 }
