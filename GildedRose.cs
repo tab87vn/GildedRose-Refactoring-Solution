@@ -4,6 +4,14 @@ namespace csharpcore
 {
     public class GildedRose
     {
+        const string BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+        const string AGEDBRIE = "Aged Brie";
+        const string SULFURAS = "Sulfuras, Hand of Ragnaros";
+        const int MAX_QUALITY = 50;
+        const int MIN_QUALITY = 0;
+        const int DOUBLE_DEGRATION_STARTS_BEFORE = 11;
+        const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
+
         IList<Item> Items;
         public GildedRose(IList<Item> Items)
         {
@@ -14,11 +22,11 @@ namespace csharpcore
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                if (Items[i].Name != AGEDBRIE && Items[i].Name != BACKSTAGE)
                 {
-                    if (Items[i].Quality > 0)
+                    if (Items[i].Quality > MIN_QUALITY)
                     {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                        if (Items[i].Name != SULFURAS)
                         {
                             Items[i].Quality = Items[i].Quality - 1;
                         }
@@ -26,23 +34,23 @@ namespace csharpcore
                 }
                 else
                 {
-                    if (Items[i].Quality < 50)
+                    if (Items[i].Quality < MAX_QUALITY)
                     {
                         Items[i].Quality = Items[i].Quality + 1;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name == BACKSTAGE)
                         {
-                            if (Items[i].SellIn < 11)
+                            if (Items[i].SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MAX_QUALITY)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
                             }
 
-                            if (Items[i].SellIn < 6)
+                            if (Items[i].SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
                             {
-                                if (Items[i].Quality < 50)
+                                if (Items[i].Quality < MAX_QUALITY)
                                 {
                                     Items[i].Quality = Items[i].Quality + 1;
                                 }
@@ -51,20 +59,20 @@ namespace csharpcore
                     }
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                if (Items[i].Name != SULFURAS)
                 {
                     Items[i].SellIn = Items[i].SellIn - 1;
                 }
 
                 if (Items[i].SellIn < 0)
                 {
-                    if (Items[i].Name != "Aged Brie")
+                    if (Items[i].Name != AGEDBRIE)
                     {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                        if (Items[i].Name != BACKSTAGE)
                         {
-                            if (Items[i].Quality > 0)
+                            if (Items[i].Quality > MIN_QUALITY)
                             {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                                if (Items[i].Name != SULFURAS)
                                 {
                                     Items[i].Quality = Items[i].Quality - 1;
                                 }
@@ -77,7 +85,7 @@ namespace csharpcore
                     }
                     else
                     {
-                        if (Items[i].Quality < 50)
+                        if (Items[i].Quality < MAX_QUALITY)
                         {
                             Items[i].Quality = Items[i].Quality + 1;
                         }
