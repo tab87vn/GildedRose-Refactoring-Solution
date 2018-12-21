@@ -41,17 +41,7 @@ namespace csharpcore
 
         private void updateIndividualItem(Item item)
         {   
-            if (!isAgedBrie(item) && !isBackstage(item))
-            {
-                if (item.Quality > MIN_QUALITY)
-                {
-                    if (!isSulfuras(item))
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
-            }
-            else if (isAgedBrie(item))
+            if (isAgedBrie(item))
             {
                 if (item.Quality < MAX_QUALITY)
                 {
@@ -78,6 +68,16 @@ namespace csharpcore
                         {
                             item.Quality = item.Quality + 1;
                         }
+                    }
+                }
+            }
+            else
+            {
+                if (item.Quality > MIN_QUALITY)
+                {
+                    if (!isSulfuras(item))
+                    {
+                        item.Quality = item.Quality - 1;
                     }
                 }
             }
