@@ -5,7 +5,7 @@ namespace csharpcore
         const string BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
         const string AGEDBRIE = "Aged Brie";
         const string SULFURAS = "Sulfuras, Hand of Ragnaros";
-        const string CONJURED = "Conjured";
+        const string CONJURED = "Conjured Mana Cake";
         public static ItemUpdater GetUpdater(Item item) {
             switch (item.Name) {
                 case AGEDBRIE:

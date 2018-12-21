@@ -162,14 +162,14 @@ namespace csharpcore
         [Fact]
         public void UpdateQuality_ConjuredItemsDegradeInQualityTwiceAsFast() {
             // Arrange
-            IList<Item> items = new List<Item> { new Item { Name = "Conjured", SellIn = 3, Quality = 20 }  };
+            IList<Item> items = new List<Item> { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 20 }  };
             GildedRose app = new GildedRose(items);
 
             // Act
             app.UpdateQuality();
 
             // Assert
-            Assert.Equal("Conjured", items[0].Name);
+            Assert.Equal("Conjured Mana Cake", items[0].Name);
             Assert.Equal(2, items[0].SellIn);
             Assert.Equal(18, items[0].Quality);
         }
