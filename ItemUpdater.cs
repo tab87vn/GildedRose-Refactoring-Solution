@@ -70,18 +70,14 @@ namespace csharpcore
             }
             else if (isSulfuras(item))
             {
-                UpdateSulfurasItemQuality();
+                SulfurasItemUpdater updater = new SulfurasItemUpdater(item);
+                updater.DoUpdateQuality();
             }
             else
             {
                 NormalItemUpdater updater = new NormalItemUpdater(item);
                 updater.DoUpdateQuality();
             }
-        }
-
-        private void UpdateSulfurasItemQuality()
-        {
-            // NOP
         }
     }
 }
