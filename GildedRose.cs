@@ -49,10 +49,7 @@ namespace csharpcore
         void decreaseQuality(Item item) {
             if (item.Quality > MIN_QUALITY)
             {
-                if (!isSulfuras(item))
-                {
-                    item.Quality = item.Quality - 1;
-                }
+                item.Quality = item.Quality - 1;
             }
         }
 
@@ -78,7 +75,10 @@ namespace csharpcore
             }
             else
             {
-                decreaseQuality(item);
+                if (!isSulfuras(item))
+                {
+                    decreaseQuality(item);
+                }
             }
 
             if (!isSulfuras(item))
@@ -98,7 +98,10 @@ namespace csharpcore
                 }
                 else
                 {
-                    decreaseQuality(item);
+                    if (!isSulfuras(item))
+                    {
+                        decreaseQuality(item);
+                    }
                 }
             }
         }
