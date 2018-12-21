@@ -39,36 +39,31 @@ namespace csharpcore
             }
         }
 
+        void increaseQuality(Item item) {
+            if (item.Quality < MAX_QUALITY)
+            {
+                item.Quality = item.Quality + 1;
+            }
+        }
+
         private void updateIndividualItem(Item item)
         {   
             if (isAgedBrie(item))
             {
-                if (item.Quality < MAX_QUALITY)
-                {
-                    item.Quality = item.Quality + 1;
-                }
+                increaseQuality(item);
             }
             else if (isBackstage(item))
             {
-                if (item.Quality < MAX_QUALITY)
+                increaseQuality(item);
+
+                if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
                 {
-                    item.Quality = item.Quality + 1;
+                    increaseQuality(item);
+                }
 
-                    if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
-                    {
-                        if (item.Quality < MAX_QUALITY)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
-                    }
-
-                    if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
-                    {
-                        if (item.Quality < MAX_QUALITY)
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
-                    }
+                if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
+                {
+                    increaseQuality(item);
                 }
             }
             else
