@@ -46,6 +46,16 @@ namespace csharpcore
             }
         }
 
+        void decreaseQuality(Item item) {
+            if (item.Quality > MIN_QUALITY)
+            {
+                if (!isSulfuras(item))
+                {
+                    item.Quality = item.Quality - 1;
+                }
+            }
+        }
+
         private void updateIndividualItem(Item item)
         {   
             if (isAgedBrie(item))
@@ -68,13 +78,7 @@ namespace csharpcore
             }
             else
             {
-                if (item.Quality > MIN_QUALITY)
-                {
-                    if (!isSulfuras(item))
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
+                decreaseQuality(item);
             }
 
             if (!isSulfuras(item))
@@ -88,13 +92,7 @@ namespace csharpcore
                 {
                     if (!isBackstage(item))
                     {
-                        if (item.Quality > MIN_QUALITY)
-                        {
-                            if (!isSulfuras(item))
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
-                        }
+                        decreaseQuality(item);
                     }
                     else
                     {
