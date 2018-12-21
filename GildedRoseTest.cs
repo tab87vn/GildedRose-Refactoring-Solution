@@ -158,5 +158,20 @@ namespace csharpcore
             Assert.Equal(-2, items[0].SellIn); 
             Assert.Equal(0, items[0].Quality);
         }
+
+        [Fact]
+        public void UpdateQuality_ConjuredItemsDegradeInQualityTwiceAsFast() {
+            // Arrange
+            IList<Item> items = new List<Item> { new Item { Name = "Conjured", SellIn = 3, Quality = 20 }  };
+            GildedRose app = new GildedRose(items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal("Conjured", items[0].Name);
+            Assert.Equal(2, items[0].SellIn);
+            Assert.Equal(18, items[0].Quality);
+        }
     }
 }
