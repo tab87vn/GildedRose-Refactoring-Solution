@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace csharpcore
 {
@@ -18,77 +19,94 @@ namespace csharpcore
             this.Items = Items;
         }
 
+        private bool isAgedBrie(Item item) {
+            return item.Name == AGEDBRIE;
+        }
+
+        private bool isBackstage(Item item) {
+            return item.Name == BACKSTAGE;
+        }
+
+        private bool isSulfuras(Item item) {
+            return item.Name == SULFURAS;
+        }
+
         public void UpdateQuality()
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != AGEDBRIE && Items[i].Name != BACKSTAGE)
+                updateIndividualItem(Items[i]);
+            }
+        }
+
+        private void updateIndividualItem(Item item)
+        {   
+            if (!isAgedBrie(item) && !isBackstage(item))
+            {
+                if (item.Quality > MIN_QUALITY)
                 {
-                    if (Items[i].Quality > MIN_QUALITY)
+                    if (!isSulfuras(item))
                     {
-                        if (Items[i].Name != SULFURAS)
+                        item.Quality = item.Quality - 1;
+                    }
+                }
+            }
+            else
+            {
+                if (item.Quality < MAX_QUALITY)
+                {
+                    item.Quality = item.Quality + 1;
+
+                    if (isBackstage(item))
+                    {
+                        if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            if (item.Quality < MAX_QUALITY)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+
+                        if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
+                        {
+                            if (item.Quality < MAX_QUALITY)
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
                         }
                     }
                 }
-                else
+            }
+
+            if (!isSulfuras(item))
+            {
+                item.SellIn = item.SellIn - 1;
+            }
+
+            if (item.SellIn < 0)
+            {
+                if (!isAgedBrie(item))
                 {
-                    if (Items[i].Quality < MAX_QUALITY)
+                    if (!isBackstage(item))
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
-
-                        if (Items[i].Name == BACKSTAGE)
+                        if (item.Quality > MIN_QUALITY)
                         {
-                            if (Items[i].SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
+                            if (!isSulfuras(item))
                             {
-                                if (Items[i].Quality < MAX_QUALITY)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
+                                item.Quality = item.Quality - 1;
                             }
-
-                            if (Items[i].SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
-                            {
-                                if (Items[i].Quality < MAX_QUALITY)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
-
-                if (Items[i].Name != SULFURAS)
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
-
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != AGEDBRIE)
-                    {
-                        if (Items[i].Name != BACKSTAGE)
-                        {
-                            if (Items[i].Quality > MIN_QUALITY)
-                            {
-                                if (Items[i].Name != SULFURAS)
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
                         }
                     }
                     else
                     {
-                        if (Items[i].Quality < MAX_QUALITY)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
+                        item.Quality = item.Quality - item.Quality;
+                    }
+                }
+                else
+                {
+                    if (item.Quality < MAX_QUALITY)
+                    {
+                        item.Quality = item.Quality + 1;
                     }
                 }
             }
