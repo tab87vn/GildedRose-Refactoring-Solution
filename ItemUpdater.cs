@@ -2,13 +2,13 @@ namespace csharpcore
 {
     public class ItemUpdater
     {
-        const string BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
-        const string AGEDBRIE = "Aged Brie";
-        const string SULFURAS = "Sulfuras, Hand of Ragnaros";
-        const int MAX_QUALITY = 50;
-        const int MIN_QUALITY = 0;
-        const int DOUBLE_DEGRATION_STARTS_BEFORE = 11;
-        const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
+        protected const string BACKSTAGE = "Backstage passes to a TAFKAL80ETC concert";
+        protected const string AGEDBRIE = "Aged Brie";
+        protected const string SULFURAS = "Sulfuras, Hand of Ragnaros";
+        protected const int MAX_QUALITY = 50;
+        protected const int MIN_QUALITY = 0;
+        protected const int DOUBLE_DEGRATION_STARTS_BEFORE = 11;
+        protected const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
         protected Item item;
 
         private bool isAgedBrie(Item item) {
@@ -66,7 +66,8 @@ namespace csharpcore
             }
             else if (isBackstage(item))
             {
-                UpdateBackstageItemQuality(item);
+                BackstageItemUpdater updater = new BackstageItemUpdater(item);
+                updater.DoUpdateQuality();
             }
             else if (isSulfuras(item))
             {
@@ -91,27 +92,6 @@ namespace csharpcore
             if (passedSellDate(item)) {
                 decreaseQuality(item);
             }
-        }
-
-        private void UpdateBackstageItemQuality(Item item)
-        {
-            increaseQuality(item);
-
-                if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
-                {
-                    increaseQuality(item);
-                }
-
-                if (item.SellIn < TRIPLE_DEGRATION_STARTS_BEFORE)
-                {
-                    increaseQuality(item);
-                }
-
-                decreaseSellIn(item);
-
-                if (passedSellDate(item)) {
-                    item.Quality = MIN_QUALITY;
-                }
         }
     }
 }
