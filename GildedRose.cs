@@ -57,12 +57,19 @@ namespace csharpcore
             item.SellIn = item.SellIn - 1;
         }
 
+        private bool passedSellDate(Item item) {
+            return item.SellIn < 0;
+        }
+
         private void updateIndividualItem(Item item)
         {   
             if (isAgedBrie(item))
             {
                 increaseQuality(item);
                 decreaseSellIn(item);
+                if (passedSellDate(item)) {
+                    increaseQuality(item);
+                }
             }
             else if (isBackstage(item))
             {
@@ -79,6 +86,10 @@ namespace csharpcore
                 }
 
                 decreaseSellIn(item);
+
+                if (passedSellDate(item)) {
+                    item.Quality = MIN_QUALITY;
+                }
             }
             else
             {
@@ -86,23 +97,8 @@ namespace csharpcore
                 {
                     decreaseQuality(item);
                     decreaseSellIn(item);
-                }
-            }
 
-            if (item.SellIn < 0)
-            {
-                if (isAgedBrie(item))
-                {
-                    increaseQuality(item);
-                }
-                else if (isBackstage(item))
-                {
-                    item.Quality = MIN_QUALITY;
-                }
-                else
-                {
-                    if (!isSulfuras(item))
-                    {
+                    if (passedSellDate(item)) {
                         decreaseQuality(item);
                     }
                 }
