@@ -7,5 +7,4 @@ namespace csharpcore
             return updater;
         }
     }
-
 }

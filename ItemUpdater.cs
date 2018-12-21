@@ -23,7 +23,6 @@ namespace csharpcore
             return item.Name == SULFURAS;
         }
 
-
         public ItemUpdater(Item item)
         {
             this.item = item;
@@ -75,23 +74,14 @@ namespace csharpcore
             }
             else
             {
-                UpdateNormalItemQualilty(item);
+                NormalItemUpdater updater = new NormalItemUpdater(item);
+                updater.DoUpdateQuality();
             }
         }
 
         private void UpdateSulfurasItemQuality()
         {
             // NOP
-        }
-
-        private void UpdateNormalItemQualilty(Item item)
-        {
-            decreaseQuality(item);
-            decreaseSellIn(item);
-
-            if (passedSellDate(item)) {
-                decreaseQuality(item);
-            }
         }
     }
 }
