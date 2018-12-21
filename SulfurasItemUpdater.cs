@@ -5,10 +5,5 @@ namespace csharpcore
         public SulfurasItemUpdater(Item item) : base(item)
         {
         }
-
-        public new void DoUpdateQuality()
-        {
-            // NOP
-        }
     }
 }

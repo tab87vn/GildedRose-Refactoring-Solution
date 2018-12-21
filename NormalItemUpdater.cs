@@ -6,7 +6,7 @@ namespace csharpcore
         {
         }
 
-        public new void DoUpdateQuality()
+        public override void DoUpdateQuality()
         {
             decreaseQuality(item);
             decreaseSellIn(item);

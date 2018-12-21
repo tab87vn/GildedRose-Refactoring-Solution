@@ -6,7 +6,7 @@
         {
         }
 
-        public new void DoUpdateQuality()
+        public override void DoUpdateQuality()
         {
             increaseQuality(item);
             decreaseSellIn(item);
