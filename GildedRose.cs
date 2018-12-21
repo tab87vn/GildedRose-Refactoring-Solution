@@ -65,15 +65,40 @@ namespace csharpcore
         {   
             if (isAgedBrie(item))
             {
-                increaseQuality(item);
-                decreaseSellIn(item);
-                if (passedSellDate(item)) {
-                    increaseQuality(item);
-                }
+                UpdateAgedBrieItemQuality(item);
             }
             else if (isBackstage(item))
             {
-                increaseQuality(item);
+                UpdateBackstageItemQuality(item);
+            }
+            else if (isSulfuras(item))
+            {
+                UpdateSulfurasItemQuality();
+            }
+            else
+            {
+                UpdateNormalItemQualilty(item);
+            }
+        }
+
+        private void UpdateSulfurasItemQuality()
+        {
+            // NOP
+        }
+
+        private void UpdateNormalItemQualilty(Item item)
+        {
+            decreaseQuality(item);
+            decreaseSellIn(item);
+
+            if (passedSellDate(item)) {
+                decreaseQuality(item);
+            }
+        }
+
+        private void UpdateBackstageItemQuality(Item item)
+        {
+            increaseQuality(item);
 
                 if (item.SellIn < DOUBLE_DEGRATION_STARTS_BEFORE)
                 {
@@ -90,18 +115,14 @@ namespace csharpcore
                 if (passedSellDate(item)) {
                     item.Quality = MIN_QUALITY;
                 }
-            }
-            else
-            {
-                if (!isSulfuras(item))
-                {
-                    decreaseQuality(item);
-                    decreaseSellIn(item);
+        }
 
-                    if (passedSellDate(item)) {
-                        decreaseQuality(item);
-                    }
-                }
+        private void UpdateAgedBrieItemQuality(Item item)
+        {
+            increaseQuality(item);
+            decreaseSellIn(item);
+            if (passedSellDate(item)) {
+                increaseQuality(item);
             }
         }
     }
