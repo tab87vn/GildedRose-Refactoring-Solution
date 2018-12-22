@@ -14,12 +14,12 @@ namespace GildedRoseKata.ItemUpdaters
 
         public override void DoUpdateQuality()
         {
-            IncreaseQualityBy(getQualityIncreaseValue());
+            IncreaseQualityBy(GetQualityIncreaseValue());
             DecreaseSellInByOne();
-            dropQualityToZeroIfSellDateHasPassed();
+            DropQualityToZeroIfSellDateHasPassed();
         }
 
-        private void dropQualityToZeroIfSellDateHasPassed()
+        private void DropQualityToZeroIfSellDateHasPassed()
         {
             if (SellDateHasPassed())
             {
@@ -27,7 +27,7 @@ namespace GildedRoseKata.ItemUpdaters
             }
         }
 
-        private int getQualityIncreaseValue() {
+        private int GetQualityIncreaseValue() {
             if (item.SellIn < DAYS_BEFORE_QUALITY_INCREASES_BY_3)
             {
                 return 3;

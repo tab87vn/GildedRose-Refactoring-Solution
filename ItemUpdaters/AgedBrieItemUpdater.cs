@@ -15,15 +15,18 @@ namespace GildedRoseKata.ItemUpdaters
         {
             DecreaseSellInByOne();
 
+            // Quality increase speed is x2 if the sell date has passed
             int qualityIncreaseSpeed = SellDateHasPassed() ? 2 : 1;
             IncreaseQualityBy(qualityIncreaseSpeed * BASE_VALUE_CHANGE_PER_DAY);
         }
 
+        // Increases item quality as long as it's no more than 50
         protected void IncreaseQualityBy(int value)
         {
             if (item.Quality < MAX_QUALITY)
             {
-                item.Quality = item.Quality + value > MAX_QUALITY ? MAX_QUALITY : item.Quality + value;
+                item.Quality = item.Quality + value > MAX_QUALITY ?
+                    MAX_QUALITY : item.Quality + value;
             }
         }
     }
