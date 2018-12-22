@@ -173,5 +173,37 @@ namespace csharpcore
             Assert.Equal(2, items[0].SellIn);
             Assert.Equal(18, items[0].Quality);
         }
+
+        [Fact]
+        public void UpdateQuality_SellByDateHasPassed_ConjuredItemsDegradeInQualityTwiceAsFastAsNormalItems()
+        {
+            // Arrange
+            IList<Item> items = new List<Item> { new Item { Name = "Conjured Mana Cake", SellIn = -1, Quality = 20 }  };
+            GildedRose app = new GildedRose(items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal("Conjured Mana Cake", items[0].Name);
+            Assert.Equal(-2, items[0].SellIn);
+            Assert.Equal(16, items[0].Quality);
+        }
+
+        [Fact]
+        public void UpdateQuality_SellByDateHasPassed_ConjuredItemsDegradeInQualityTwiceAsFastAsNormalItems_QualityCannotBeNegative()
+        {
+            // Arrange
+            IList<Item> items = new List<Item> { new Item { Name = "Conjured Mana Cake", SellIn = -1, Quality = 2 }  };
+            GildedRose app = new GildedRose(items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal("Conjured Mana Cake", items[0].Name);
+            Assert.Equal(-2, items[0].SellIn);
+            Assert.Equal(0, items[0].Quality);
+        }
     }
 }
