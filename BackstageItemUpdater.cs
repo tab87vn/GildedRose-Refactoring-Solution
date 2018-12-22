@@ -4,6 +4,7 @@ namespace csharpcore
     {
         const int DAYS_BEFORE_QUALITY_INCREASES_BY_2 = 11;
         const int DAYS_BEFORE_QUALITY_INCREASES_BY_3 = 6;
+
         public BackstageItemUpdater(Item item) : base(item)
         {
             // NOP
@@ -11,21 +12,23 @@ namespace csharpcore
 
         public override void DoUpdateQuality()
         {
-            IncreaseQuality(item);
-
             if (item.SellIn < DAYS_BEFORE_QUALITY_INCREASES_BY_3)
             {
-                IncreaseQuality(item);
+                IncreaseQualityBy(3);
             }
-
             else if (item.SellIn < DAYS_BEFORE_QUALITY_INCREASES_BY_2)
             {
-                IncreaseQuality(item);
+                IncreaseQualityBy(2);
+            }
+            else
+            {
+                IncreaseQualityBy(BASE_VALUE_CHANGE_PER_DAY);
             }
 
-            DecreaseSellIn(item);
+            DecreaseSellInByOne();
 
-            if (SellDateHasPassed(item)) {
+            if (SellDateHasPassed())
+            {
                 item.Quality = MIN_QUALITY;
             }
         }

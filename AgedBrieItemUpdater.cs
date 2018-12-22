@@ -9,10 +9,15 @@
 
         public override void DoUpdateQuality()
         {
-            IncreaseQuality(item);
-            DecreaseSellIn(item);
-            if (SellDateHasPassed(item)) {
-                IncreaseQuality(item);
+            DecreaseSellInByOne();
+
+            if (SellDateHasPassed())
+            {
+                IncreaseQualityBy(2 * BASE_VALUE_CHANGE_PER_DAY);
+            }
+            else
+            {
+                IncreaseQualityBy(BASE_VALUE_CHANGE_PER_DAY);
             }
         }
     }

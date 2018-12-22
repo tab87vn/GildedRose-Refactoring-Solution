@@ -4,6 +4,8 @@ namespace csharpcore
     {
         protected const int MAX_QUALITY = 50;
         protected const int MIN_QUALITY = 0;
+        protected const int BASE_VALUE_CHANGE_PER_DAY = 1;
+
         protected Item item;
 
         public ItemUpdater(Item item)
@@ -16,25 +18,29 @@ namespace csharpcore
             // NOP
         }
 
-        protected void IncreaseQuality(Item item) {
+        protected void IncreaseQualityBy(int value)
+        {
             if (item.Quality < MAX_QUALITY)
             {
-                item.Quality = item.Quality + 1;
+                item.Quality = item.Quality + value > MAX_QUALITY ? MAX_QUALITY : item.Quality + value;
             }
         }
 
-        protected void DecreaseQuality(Item item) {
+        protected void DecreaseQualityBy(int value)
+        {
             if (item.Quality > MIN_QUALITY)
             {
-                item.Quality = item.Quality - 1;
+                item.Quality = item.Quality - value < MIN_QUALITY ? MIN_QUALITY : item.Quality - value;
             }
         }
 
-        protected void DecreaseSellIn(Item item) {
-            item.SellIn = item.SellIn - 1;
+        protected void DecreaseSellInByOne()
+        {
+            item.SellIn = item.SellIn - BASE_VALUE_CHANGE_PER_DAY;
         }
 
-        protected  bool SellDateHasPassed(Item item) {
+        protected  bool SellDateHasPassed()
+        {
             return item.SellIn < 0;
         }
     }

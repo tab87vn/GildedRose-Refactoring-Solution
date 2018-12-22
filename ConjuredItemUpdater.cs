@@ -9,12 +9,15 @@ namespace csharpcore
 
         public override void DoUpdateQuality()
         {
-            DecreaseQuality(item);
-            DecreaseQuality(item);
-            DecreaseSellIn(item);
+            DecreaseSellInByOne();
 
-            if (SellDateHasPassed(item)) {
-                DecreaseQuality(item);
+            if (SellDateHasPassed())
+            {
+                DecreaseQualityBy(4 * BASE_VALUE_CHANGE_PER_DAY);
+            }
+            else
+            {
+                DecreaseQualityBy(2 * BASE_VALUE_CHANGE_PER_DAY);
             }
         }
     }
