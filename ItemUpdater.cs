@@ -4,8 +4,6 @@ namespace csharpcore
     {
         protected const int MAX_QUALITY = 50;
         protected const int MIN_QUALITY = 0;
-        protected const int DOUBLE_DEGRATION_STARTS_BEFORE = 11;
-        protected const int TRIPLE_DEGRATION_STARTS_BEFORE = 6;
         protected Item item;
 
         public ItemUpdater(Item item)
