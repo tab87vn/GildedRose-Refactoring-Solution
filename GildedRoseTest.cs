@@ -15,7 +15,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_DecreaseQualityAndSellInByOne() {
+        public void UpdateQuality_DecreaseQualityAndSellInByOne()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "foo", SellIn = 1, Quality = 2 }  };        
             GildedRose app = new GildedRose(items);
@@ -30,7 +31,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_SellByDateHasPassed_QualityDegradesTwiceAsFast() {
+        public void UpdateQuality_SellByDateHasPassed_QualityDegradesTwiceAsFast()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "foo", SellIn = -1, Quality = 3 }  };            
             GildedRose app = new GildedRose(items);
@@ -45,7 +47,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_QualityCannotBeNegative(){
+        public void UpdateQuality_QualityCannotBeNegative()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "foo", SellIn = 2, Quality = 2 }  };
             GildedRose app = new GildedRose(items);
@@ -62,7 +65,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_QualityCannotBeMoreThan50() {
+        public void UpdateQuality_QualityCannotBeMoreThan50()
+        {
             // Arrange
             IList<Item> items = new List<Item> {
                 new Item { Name = "Aged Brie", SellIn = -1, Quality = 50 },
@@ -85,7 +89,40 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_SulfurasNeverHasToBeSoldOrDecreasesInQuality() {
+        public void UpdateQuality_AgedBrieQualityIncreasesAsItAges()
+        {
+            // Arrange
+            IList<Item> items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 20, Quality = 2 }  };
+            GildedRose app = new GildedRose(items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal("Aged Brie", items[0].Name);
+            Assert.Equal(19, items[0].SellIn);
+            Assert.Equal(3, items[0].Quality);
+        }
+
+        [Fact]
+        public void UpdateQuality_SellByDateHasPassed_AgedBrieQualityIncreasesTwiceAsFast()
+        {
+            // Arrange
+            IList<Item> items = new List<Item> { new Item { Name = "Aged Brie", SellIn = -2, Quality = 2 }  };
+            GildedRose app = new GildedRose(items);
+
+            // Act
+            app.UpdateQuality();
+
+            // Assert
+            Assert.Equal("Aged Brie", items[0].Name);
+            Assert.Equal(-3, items[0].SellIn);
+            Assert.Equal(4, items[0].Quality);
+        }
+
+        [Fact]
+        public void UpdateQuality_SulfurasNeverHasToBeSoldOrDecreasesInQuality()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 10, Quality = 80 }  };        
             GildedRose app = new GildedRose(items);
@@ -100,7 +137,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_SellByDateApproaches_BackstageQualityIncreasesByOne() {
+        public void UpdateQuality_SellByDateApproaches_BackstageQualityIncreasesByOne()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 20 }  };        
             GildedRose app = new GildedRose(items);
@@ -115,7 +153,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_10DaysOrLessRemaining_BackstageQualityIncreasesBy2() {
+        public void UpdateQuality_10DaysOrLessRemaining_BackstageQualityIncreasesBy2()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 20 }  };        
             GildedRose app = new GildedRose(items);
@@ -130,7 +169,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_5DaysOrLessRemaining_BackstageQualityIncreasesBy3() {
+        public void UpdateQuality_5DaysOrLessRemaining_BackstageQualityIncreasesBy3()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 20 }  };                
             GildedRose app = new GildedRose(items);
@@ -145,7 +185,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_BackstageQualityDropsTo0AfterTheConcert() {
+        public void UpdateQuality_BackstageQualityDropsTo0AfterTheConcert()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = -1, Quality = 20 }  };
             GildedRose app = new GildedRose(items);
@@ -160,7 +201,8 @@ namespace csharpcore
         }
 
         [Fact]
-        public void UpdateQuality_ConjuredItemsDegradeInQualityTwiceAsFast() {
+        public void UpdateQuality_ConjuredItemsDegradeInQualityTwiceAsFastAsNormaItems()
+        {
             // Arrange
             IList<Item> items = new List<Item> { new Item { Name = "Conjured Mana Cake", SellIn = 3, Quality = 20 }  };
             GildedRose app = new GildedRose(items);
