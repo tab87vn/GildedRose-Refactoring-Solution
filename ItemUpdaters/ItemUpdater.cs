@@ -1,4 +1,6 @@
-namespace csharpcore
+using GildedRoseKata.Models;
+
+namespace GildedRoseKata.ItemUpdaters
 {
     public class ItemUpdater
     {

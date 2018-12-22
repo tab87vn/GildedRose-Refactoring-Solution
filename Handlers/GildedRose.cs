@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using GildedRoseKata.ItemUpdaters;
+using GildedRoseKata.Models;
 
-namespace csharpcore
+namespace GildedRoseKata.Handlers
 {
     public class GildedRose
     {

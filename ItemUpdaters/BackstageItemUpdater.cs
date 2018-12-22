@@ -1,4 +1,6 @@
-namespace csharpcore
+using GildedRoseKata.Models;
+
+namespace GildedRoseKata.ItemUpdaters
 {
     internal class BackstageItemUpdater : ItemUpdater
     {
@@ -32,5 +34,5 @@ namespace csharpcore
                 item.Quality = MIN_QUALITY;
             }
         }
-    }    
+    }
 }

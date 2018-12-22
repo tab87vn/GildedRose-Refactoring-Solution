@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using GildedRoseKata.Handlers;
+using GildedRoseKata.Models;
 
-namespace csharpcore
+namespace GildedRoseKata
 {
     public class Program
     {

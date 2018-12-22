@@ -1,5 +1,7 @@
- namespace csharpcore
- {
+using GildedRoseKata.Models;
+
+namespace GildedRoseKata.ItemUpdaters
+{
     public class AgedBrieItemUpdater : ItemUpdater
     {
         public AgedBrieItemUpdater(Item item) : base(item)

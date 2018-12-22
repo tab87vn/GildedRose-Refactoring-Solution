@@ -1,4 +1,4 @@
-﻿namespace csharpcore
+﻿namespace GildedRoseKata.Models
 {
     public class Item
     {

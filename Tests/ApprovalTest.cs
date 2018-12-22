@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace csharpcore
+namespace GildedRoseKata.Tests
 {
     public class ApprovalTest
     {
