@@ -2,24 +2,28 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    public class AgedBrieItemUpdater : ItemUpdater
+    public class AgedBrieItemUpdater : DefaultItemBehavior, IItemUpdater
     {
+        private const int MAX_QUALITY = 50;
+
         public AgedBrieItemUpdater(Item item) : base(item)
         {
             // NOP
         }
 
-        public override void DoUpdateQuality()
+        public virtual void DoUpdateQuality()
         {
             DecreaseSellInByOne();
 
-            if (SellDateHasPassed())
+            int qualityIncreaseSpeed = SellDateHasPassed() ? 2 : 1;
+            IncreaseQualityBy(qualityIncreaseSpeed * BASE_VALUE_CHANGE_PER_DAY);
+        }
+
+        protected void IncreaseQualityBy(int value)
+        {
+            if (item.Quality < MAX_QUALITY)
             {
-                IncreaseQualityBy(2 * BASE_VALUE_CHANGE_PER_DAY);
-            }
-            else
-            {
-                IncreaseQualityBy(BASE_VALUE_CHANGE_PER_DAY);
+                item.Quality = item.Quality + value > MAX_QUALITY ? MAX_QUALITY : item.Quality + value;
             }
         }
     }

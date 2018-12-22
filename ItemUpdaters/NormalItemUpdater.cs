@@ -2,24 +2,30 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    internal class NormalItemUpdater : ItemUpdater
+    public class NormalItemUpdater : DefaultItemBehavior, IItemUpdater
     {
+        private const int MIN_QUALITY = 0;
+
+        protected int itemTypeQualityDecreaseFactor;
+
         public NormalItemUpdater(Item item) : base(item)
         {
-            // NOP
+            itemTypeQualityDecreaseFactor = 1;
         }
 
-        public override void DoUpdateQuality()
+        public void DoUpdateQuality()
         {
             DecreaseSellInByOne();
 
-            if (SellDateHasPassed())
+            int qualityDecreaseSpeed = SellDateHasPassed() ? 2 : 1;
+            DecreaseQualityBy(itemTypeQualityDecreaseFactor * qualityDecreaseSpeed * BASE_VALUE_CHANGE_PER_DAY);
+        }
+
+        protected void DecreaseQualityBy(int value)
+        {
+            if (item.Quality > MIN_QUALITY)
             {
-                DecreaseQualityBy(2 * BASE_VALUE_CHANGE_PER_DAY);
-            }
-            else
-            {
-                DecreaseQualityBy(BASE_VALUE_CHANGE_PER_DAY);
+                item.Quality = item.Quality - value < MIN_QUALITY ? MIN_QUALITY : item.Quality - value;
             }
         }
     }

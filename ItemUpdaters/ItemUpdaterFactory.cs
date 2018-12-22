@@ -9,7 +9,7 @@ namespace GildedRoseKata.ItemUpdaters
         const string SULFURAS = "Sulfuras, Hand of Ragnaros";
         const string CONJURED = "Conjured Mana Cake";
 
-        public static ItemUpdater GetUpdater(Item item)
+        public static IItemUpdater GetUpdater(Item item)
         {
             switch (item.Name)
             {
@@ -18,7 +18,7 @@ namespace GildedRoseKata.ItemUpdaters
                 case BACKSTAGE:
                     return new BackstageItemUpdater(item);
                 case SULFURAS:
-                    return new SulfurasItemUpdater(item);
+                    return new SulfurasItemUpdater();
                 case CONJURED:
                     return new ConjuredItemUpdater(item);
                 default:

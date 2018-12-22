@@ -2,7 +2,7 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    internal class BackstageItemUpdater : ItemUpdater
+    public class BackstageItemUpdater : AgedBrieItemUpdater
     {
         const int DAYS_BEFORE_QUALITY_INCREASES_BY_2 = 11;
         const int DAYS_BEFORE_QUALITY_INCREASES_BY_3 = 6;
@@ -14,24 +14,31 @@ namespace GildedRoseKata.ItemUpdaters
 
         public override void DoUpdateQuality()
         {
+            IncreaseQualityBy(getQualityIncreaseValue());
+            DecreaseSellInByOne();
+            dropQualityToZeroIfSellDateHasPassed();
+        }
+
+        private void dropQualityToZeroIfSellDateHasPassed()
+        {
+            if (SellDateHasPassed())
+            {
+                item.Quality = 0;
+            }
+        }
+
+        private int getQualityIncreaseValue() {
             if (item.SellIn < DAYS_BEFORE_QUALITY_INCREASES_BY_3)
             {
-                IncreaseQualityBy(3);
+                return 3;
             }
             else if (item.SellIn < DAYS_BEFORE_QUALITY_INCREASES_BY_2)
             {
-                IncreaseQualityBy(2);
+                return 2;
             }
             else
             {
-                IncreaseQualityBy(BASE_VALUE_CHANGE_PER_DAY);
-            }
-
-            DecreaseSellInByOne();
-
-            if (SellDateHasPassed())
-            {
-                item.Quality = MIN_QUALITY;
+                return BASE_VALUE_CHANGE_PER_DAY;
             }
         }
     }
