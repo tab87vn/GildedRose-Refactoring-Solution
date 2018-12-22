@@ -2,7 +2,7 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    public class AgedBrieItemUpdater : DefaultItemBehavior, IItemUpdater
+    public class AgedBrieItemUpdater : DefaultItemUpdaterBehavior, IItemUpdater
     {
         private const int MAX_QUALITY = 50;
 

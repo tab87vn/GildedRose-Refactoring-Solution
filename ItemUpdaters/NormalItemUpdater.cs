@@ -2,7 +2,7 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    public class NormalItemUpdater : DefaultItemBehavior, IItemUpdater
+    public class NormalItemUpdater : DefaultItemUpdaterBehavior, IItemUpdater
     {
         private const int MIN_QUALITY = 0;
 
