@@ -2,11 +2,12 @@ using GildedRoseKata.Models;
 
 namespace GildedRoseKata.ItemUpdaters
 {
-    internal class SulfurasItemUpdater : ItemUpdater
+    public class SulfurasItemUpdater : IItemUpdater
     {
-        public SulfurasItemUpdater(Item item) : base(item)
+        public void DoUpdateQuality()
         {
-            // NOP
+            // Intentionally left blank because Sulfuras items
+            // never change their values
         }
     }
 }
